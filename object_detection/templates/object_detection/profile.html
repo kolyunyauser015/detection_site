@@ -1,0 +1,15 @@
+{% extends 'object_detection/base_generic.html' %}
+{% block title %} Профиль пользователя {% endblock %}
+
+{% block content %}
+<main class="container mt-4">
+    <h2>Профиль пользователя</h2>
+    <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+        <p ><button type="submit">Сохранить</button></p>
+
+        <p ><a href="{% url 'object_detection:password_change' %}">Сменить пароль</a></p>
+    </form>
+</main>
+{% endblock %}

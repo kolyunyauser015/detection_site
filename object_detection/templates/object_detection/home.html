@@ -1,0 +1,17 @@
+{% extends "object_detection/base_generic.html" %}
+
+{% block title %} Домашняя страница {% endblock %}
+
+{% block content %}
+    <main  class="container mt-4">
+        <h1>Welcome to the Object Detection Platform</h1>
+        <p>This is the home page of your application</p>
+        {% if user.is_authenticated %}
+            <a href="{% url 'object_detection:dashboard' %}">
+                Go to Dashboard
+            </a>
+        {% else %}
+            <a href="{% url 'object_detection:login' %}"> Go to Dashboard </a>
+        {% endif %}
+    </main>
+{% endblock %}

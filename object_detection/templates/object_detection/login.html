@@ -1,0 +1,17 @@
+{% extends "object_detection/base_generic.html" %}
+
+{% block title %} Авторизация {% endblock %}
+
+{% block content %}
+    <main class="container mt-4">
+        <h2>Авторизация</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p ><button type="submit">Войти</button></p>
+            <p ><a href="{% url 'object_detection:password_reset' %}">Забыли пароль?</a></p>
+        </form>
+        <a href="{% url 'object_detection:register' %}">Регистрация</a>
+    </main>
+{% endblock %}
+

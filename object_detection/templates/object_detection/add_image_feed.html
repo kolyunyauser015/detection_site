@@ -1,0 +1,14 @@
+{% extends "object_detection/base_generic.html" %}
+
+{% block title %} Загрузка изображений {% endblock %}
+
+{% block content %}
+    <main class="container mt-4">
+        <h2>Загрузка изображений</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+    <button type="submit">Загрузить</button>
+        </form>
+    </main>
+{% endblock %}

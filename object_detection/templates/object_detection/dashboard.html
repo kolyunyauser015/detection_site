@@ -1,0 +1,35 @@
+{% extends "object_detection/base_generic.html" %}
+
+{% block title %} Дашборд {% endblock %}
+
+{% block content %}
+<h2>Дашборд</h2>
+<a href="{% url 'object_detection:add_image_feed' %}" class="btn btn-primary mb-3">Добавить изображение</a>
+
+{% for feed in image_feeds %}
+<div class="card mb-3">
+    <div class="card-header">
+        <a href="{% url 'object_detection:process_feed' feed.id %}" class="btn btn-success">Обработать изображение</a>
+    </div>
+    <div class="card-body">
+        <a href="{{ feed.image.url }}" target="_blank">
+            <img src="{{ feed.image.url }}" alt="Исходное изображение" style="width: 75px; height: 70px;">
+        </a>
+        {% if feed.processed_image %}
+        <a href="{{ feed.processed_image.url }}" target="_blank">
+            <img src="{{ feed.processed_image.url }}" alt="Обработанное изображение" style="width: 75px; height: 70px;">
+        </a>
+        <ul>
+            {% for obj in feed.detected_objects.all %}
+            <li>{{ obj.object_type }} - {{ obj.confidence|floatformat:2 }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <form action="{% url 'object_detection:delete_image' feed.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">Удалить</button>
+    </form>
+</div>
+{% endfor %}
+{% endblock %}
